@@ -16,7 +16,7 @@ if($@) {
 } else {
 	my $tps = Test::Pod::Snippets->new;
 
-	my @modules = qw/ Locale:CA /;
+	my @modules = qw/ Locale::CA /;
 
 	$tps->runtest( module => $_, testgroup => 1 ) for @modules;
 }
