@@ -1,7 +1,9 @@
 Changes
+LICENCE
 MANIFEST
 Makefile.PL
 README
+README.md
 ignore.txt
 lib/Locale/CA.pm
 t/00-load.t
