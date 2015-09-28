@@ -1,4 +1,7 @@
-#!perl -w
+#!perl -wT
+
+use strict;
+use warnings;
 
 use Test::Most;
 

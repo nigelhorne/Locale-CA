@@ -7,7 +7,8 @@ README.md
 ignore.txt
 lib/Locale/CA.pm
 t/00-load.t
-t/01-basics.t
+t/10-new.t
+t/20-basics.t
 t/boiler.t
 t/changes.t
 t/coverage.t
@@ -30,3 +31,4 @@ t/unused.t
 t/used.t
 t/vars.t
 META.yml                                 Module meta-data (added by MakeMaker)
+.travis.yml

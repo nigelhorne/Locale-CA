@@ -10,11 +10,11 @@ Locale::CA - two letter codes for province identification in Canada and vice ver
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 SYNOPSIS
 
@@ -38,7 +38,10 @@ Creates a Locale::CA object.
 =cut
 
 sub new {
-	my $class = shift;
+	my $proto = shift;
+	my $class = ref($proto) || $proto;
+
+	return unless(defined($class));
 
 	my $self = {};
 
@@ -141,7 +144,7 @@ Based on L<Locale::US> - Copyright (c) 2002 - C<< $present >> Terrence Brannon.
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2012 Nigel Horne.
+Copyright 2012-2015 Nigel Horne.
 
 This program is released under the following licence: GPL
 
