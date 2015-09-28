@@ -31,4 +31,3 @@ t/unused.t
 t/used.t
 t/vars.t
 META.yml                                 Module meta-data (added by MakeMaker)
-.travis.yml
