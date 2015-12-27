@@ -94,7 +94,7 @@ province name as the value.
 
 =head1 SEE ALSO
 
-=head2 Locale::Country
+L<Locale::Country>
 
 =head1 AUTHOR
 
