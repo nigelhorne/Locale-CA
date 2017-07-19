@@ -15,7 +15,7 @@ perl:
 
 before_install:
   - cpanm --installdeps --notest Data::Section::Simple
-  - cpanm --notest Data::Section::Simple
+  - cpanm -n Devel::Cover::Report::Coveralls Data::Section::Simple
 
 install:
   - cpanm -v --installdeps --notest .
