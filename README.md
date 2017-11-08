@@ -2,6 +2,7 @@
 [![Windows Build Status](https://ci.appveyor.com/api/projects/status/78biwdwbpo72j6cq?svg=true)](https://ci.appveyor.com/project/nigelhorne/locale-ca)
 [![Dependency Status](https://dependencyci.com/github/nigelhorne/Locale-CA/badge)](https://dependencyci.com/github/nigelhorne/Locale-CA)
 [![Coverage Status](https://coveralls.io/repos/github/nigelhorne/Locale-CA/badge.svg?branch=master)](https://coveralls.io/github/nigelhorne/Locale-CA?branch=master)
+[![Kritika Analysis Status](https://kritika.io/users/nigelhorne/repos/6535371310181089/heads/master/status.svg)](https://kritika.io/users/nigelhorne/repos/6535371310181089/heads/master/)
 
 # Locale::CA
 
