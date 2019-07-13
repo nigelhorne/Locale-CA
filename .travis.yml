@@ -15,6 +15,8 @@ perl:
   - "5.12"
 
 before_install:
+  - sudo apt-get update -q
+  - sudo apt-get install -y libdevel-cover-perl
   - cpanm --installdeps --notest Data::Section::Simple
   - cpanm -n Devel::Cover::Report::Coveralls Data::Section::Simple
 
