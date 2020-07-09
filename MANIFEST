@@ -1,7 +1,8 @@
+.github/workflows/all.yml
 Changes
 ignore.txt
 lib/Locale/CA.pm
-LICENCE
+LICENSE
 Makefile.PL
 MANIFEST
 META.yml			Module meta-data (added by MakeMaker)

@@ -45,7 +45,12 @@ sub new {
 
 	my $self = {};
 
-	my $data = Data::Section::Simple::get_data_section('provinces');
+	my $data;
+	if(defined($ENV{'LANG'}) && ($ENV{'LANG'} =~ /^fr/)) {
+		$data = Data::Section::Simple::get_data_section('provinces_fr');
+	} else {
+		$data = Data::Section::Simple::get_data_section('provinces_en');
+	}
 
 	my @line = split /\n/, $data;
 
@@ -144,15 +149,15 @@ Based on L<Locale::US> - Copyright (c) 2002 - C<< $present >> Terrence Brannon.
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2012-2015 Nigel Horne.
+Copyright 2012-2020 Nigel Horne.
 
-This program is released under the following licence: GPL
+This program is released under the following licence: GPL2
 
 =cut
 
 1; # End of Locale::CA
 __DATA__
-@@ provinces
+@@ provinces_en
 AB:ALBERTA
 BC:BRITISH COLUMBIA
 MB:MANITOBA
@@ -163,6 +168,19 @@ NS:NOVA SCOTIA
 ON:ONTARIO
 PE:PRINCE EDWARD ISLAND
 QC:QUEBEC
+SK:SASKATCHEWAN
+YT:YUKON
+@@ provinces_fr
+AB:ALBERTA
+BC:COLOMBIE-BRITANNIQUE
+MB:MANITOBA
+NB:NOUVEAU-BRUNSWICK
+NL:TERRE-NEUVE-ET-LABRADOR
+NT:TERRITOIRES DU NORD-OUEST
+NS:NOUVELLE-ÉCOSSE
+ON:ONTARIO
+PE:ÎLE-DU-PRINCE-ÉDOUARD
+QC:QUÉBEC
 SK:SASKATCHEWAN
 YT:YUKON
 __END__
