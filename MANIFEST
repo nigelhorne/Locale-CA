@@ -22,6 +22,8 @@ t/gv.t
 t/kwalitee.t
 t/manifest.t
 t/metrics.t
+t/no404s.t
+t/noopentickets.t
 t/noplan.t
 t/pod-cm.t
 t/pod.t

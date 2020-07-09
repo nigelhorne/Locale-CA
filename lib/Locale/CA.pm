@@ -129,10 +129,6 @@ You can also look for information at:
 
 L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Locale-CA>
 
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/Locale-CA>
-
 =item * CPAN Ratings
 
 L<http://cpanratings.perl.org/d/Locale-CA>
