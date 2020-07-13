@@ -18,7 +18,7 @@ Version 0.03
 
     my $u = Locale::CA->new();
 
-    # Returns the French names of the provinces if $LANG starts with 'FR'
+    # Returns the French names of the provinces if $LANG starts with 'fr'
     my $province = $u->{code2province}{$code};
     my $code  = $u->{province2code}{$province};
 
