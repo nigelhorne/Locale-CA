@@ -10,11 +10,11 @@ Locale::CA - two letter codes for province identification in Canada and vice ver
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 =head1 SYNOPSIS
 
@@ -22,12 +22,12 @@ our $VERSION = '0.02';
 
     my $u = Locale::CA->new();
 
+    # Returns the French names of the provinces if $LANG starts with 'FR'
     my $province = $u->{code2province}{$code};
     my $code  = $u->{province2code}{$province};
 
     my @province = $u->all_province_names;
     my @code  = $u->all_province_codes;
-
 
 =head1 SUBROUTINES/METHODS
 

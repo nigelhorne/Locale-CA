@@ -4,13 +4,13 @@
 [![Coverage Status](https://coveralls.io/repos/github/nigelhorne/Locale-CA/badge.svg?branch=master)](https://coveralls.io/github/nigelhorne/Locale-CA?branch=master)
 [![Kritika Analysis Status](https://kritika.io/users/nigelhorne/repos/6535371310181089/heads/master/status.svg)](https://kritika.io/users/nigelhorne/repos/6535371310181089/heads/master/)
 
-# Locale::CA
+# NAME
 
-Two letter codes for province identification in Canada and vice versa
+Locale::CA - two letter codes for province identification in Canada and vice versa
 
 # VERSION
 
-Version 0.02
+Version 0.03
 
 # SYNOPSIS
 
@@ -18,6 +18,7 @@ Version 0.02
 
     my $u = Locale::CA->new();
 
+    # Returns the French names of the provinces if $LANG starts with 'FR'
     my $province = $u->{code2province}{$code};
     my $code  = $u->{province2code}{$province};
 
@@ -50,7 +51,7 @@ province name as the value.
 
 # SEE ALSO
 
-[Locale::Country](https://metacpan.org/pod/Locale::Country)
+[Locale::Country](https://metacpan.org/pod/Locale%3A%3ACountry)
 
 # AUTHOR
 
@@ -73,10 +74,6 @@ You can also look for information at:
 
     [http://rt.cpan.org/NoAuth/Bugs.html?Dist=Locale-CA](http://rt.cpan.org/NoAuth/Bugs.html?Dist=Locale-CA)
 
-- AnnoCPAN: Annotated CPAN documentation
-
-    [http://annocpan.org/dist/Locale-CA](http://annocpan.org/dist/Locale-CA)
-
 - CPAN Ratings
 
     [http://cpanratings.perl.org/d/Locale-CA](http://cpanratings.perl.org/d/Locale-CA)
@@ -87,10 +84,10 @@ You can also look for information at:
 
 # ACKNOWLEDGEMENTS
 
-Based on [Locale::US](https://metacpan.org/pod/Locale::US) - Copyright (c) 2002 - `$present` Terrence Brannon.
+Based on [Locale::US](https://metacpan.org/pod/Locale%3A%3AUS) - Copyright (c) 2002 - `$present` Terrence Brannon.
 
 # LICENSE AND COPYRIGHT
 
-Copyright 2012-2015 Nigel Horne.
+Copyright 2012-2020 Nigel Horne.
 
-This program is released under the following licence: GPL
+This program is released under the following licence: GPL2
