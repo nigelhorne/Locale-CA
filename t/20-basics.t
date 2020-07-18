@@ -2,7 +2,7 @@
 
 use strict;
 use warnings;
-use Test::Most tests => 17;
+use Test::Most tests => 18;
 use Test::NoWarnings;
 
 BEGIN {
@@ -38,6 +38,7 @@ NEW: {
 
 	ok(defined($u->{code2province}{$code}));
 	ok($u->{code2province}{$code} eq $province_fr);
+	ok($u->{province2code}{'QUÉBEC'} eq 'QC');
 
 	ok(defined($u->{province2code}{$province_fr}));
 	ok($u->{province2code}{$province_fr} eq $code);
