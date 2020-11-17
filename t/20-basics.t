@@ -9,7 +9,7 @@ BEGIN {
 	use_ok('Locale::CA');
 }
 
-NEW: {
+BASICS: {
 	my $code = 'NB';
 	my $province_en = 'NEW BRUNSWICK';
 	my $province_fr = 'NOUVEAU-BRUNSWICK';

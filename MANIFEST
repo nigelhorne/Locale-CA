@@ -1,4 +1,3 @@
-.github/workflows/all.yml
 Changes
 ignore.txt
 lib/Locale/CA.pm
@@ -18,6 +17,7 @@ t/coverage.t
 t/critic.t
 t/cv.t
 t/dist.t
+t/errors.t
 t/gv.t
 t/kwalitee.t
 t/manifest.t
