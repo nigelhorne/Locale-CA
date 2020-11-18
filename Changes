@@ -1,5 +1,8 @@
 Revision history for Locale-CA
 
+0.05
+	Include normalized strings
+
 0.04	Thu Jul 16 09:19:57 EDT 2020
 	lang can be passed in as a parameter
 
