@@ -55,15 +55,13 @@ sub new {
 
 	my $self = {};
 	my $data;
-	my $lang = $params{'lang'};
+	my $lang = $params{'lang'} || _get_language();
 	if(defined($lang)) {
 		if(($lang eq 'fr') || ($lang eq 'en')) {
 			$data = Data::Section::Simple::get_data_section("provinces_$lang");
 		} else {
 			die "lang can only be one of 'en' or 'fr', given $lang";
 		}
-	} elsif(defined($ENV{'LANG'}) && ($ENV{'LANG'} =~ /^fr/)) {
-		$data = Data::Section::Simple::get_data_section('provinces_fr');
 	} else {
 		$data = Data::Section::Simple::get_data_section('provinces_en');
 	}
@@ -77,6 +75,29 @@ sub new {
 	}
 
 	return bless $self, $class;
+}
+
+# https://www.gnu.org/software/gettext/manual/html_node/Locale-Environment-Variables.html
+# https://www.gnu.org/software/gettext/manual/html_node/The-LANGUAGE-variable.html
+sub _get_language
+{
+	if($ENV{'LANGUAGE'}) {
+		foreach my $l(split/:/, $ENV{'LANGUAGE'}) {
+			if(($l eq 'en') || ($l eq 'fr')) {
+				return $l;
+			}
+		}
+	}
+	foreach my $variable('LC_ALL', 'LC_MESSAGES', 'LANG') {
+		my $val = $ENV{$variable};
+		next unless(defined($val));
+
+		$val = substr($val, 0, 2);
+		if(($val eq 'en') || ($val eq 'fr')) {
+			return $val;
+		}
+	}
+	return 'en';
 }
 
 =head2 all_province_codes
