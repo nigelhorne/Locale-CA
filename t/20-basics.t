@@ -14,6 +14,7 @@ BASICS: {
 	my $province_en = 'NEW BRUNSWICK';
 	my $province_fr = 'NOUVEAU-BRUNSWICK';
 
+	delete $ENV{'LC_ALL'};
 	delete $ENV{'LANGUAGE'};
 	$ENV{'LANG'} = 'fr_FR';
 	my $u = new_ok('Locale::CA');
