@@ -18,9 +18,10 @@ WriteMakefile(
 		'Test::NoWarnings' => 0,
 		# 'Test::Kwalitee' => 0,
 	}, PREREQ_PM => {
+		'Carp' => 0,
 		'Data::Section::Simple' => 0,
 	},
-	dist				=> { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
+	dist	=> { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
 	clean	   => { FILES => 'Locale-CA-*' },
 	META_MERGE		=> {
 		'meta-spec' => { version => 2 },

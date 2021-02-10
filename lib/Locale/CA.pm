@@ -2,6 +2,7 @@ package Locale::CA;
 
 use warnings;
 use strict;
+use Carp;
 use Data::Section::Simple;
 
 =head1 NAME
@@ -42,7 +43,11 @@ sub new {
 	my $proto = shift;
 	my $class = ref($proto) || $proto;
 
-	return unless(defined($class));
+	# Use Lingua::CA->new(), not Lingua::CA::new()
+	if(!defined($class)) {
+		Carp::carp(__PACKAGE__, ' use ->new() not ::new() to instantiate');
+		return;
+	}
 
 	my %params;
 	if(ref($_[0]) eq 'HASH') {
@@ -60,7 +65,7 @@ sub new {
 		if(($lang eq 'fr') || ($lang eq 'en')) {
 			$data = Data::Section::Simple::get_data_section("provinces_$lang");
 		} else {
-			die "lang can only be one of 'en' or 'fr', given $lang";
+			Carp::croak("lang can only be one of 'en' or 'fr', given $lang");
 		}
 	} else {
 		$data = Data::Section::Simple::get_data_section('provinces_en');
@@ -182,7 +187,7 @@ Based on L<Locale::US> - Copyright (c) 2002 - C<< $present >> Terrence Brannon.
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2012-2020 Nigel Horne.
+Copyright 2012-2021 Nigel Horne.
 
 This program is released under the following licence: GPL2
 
