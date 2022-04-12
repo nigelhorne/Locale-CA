@@ -58,10 +58,8 @@ sub new {
 		$params{'lang'} = shift;
 	}
 
-	my $self = {};
 	my $data;
-	my $lang = $params{'lang'} || _get_language();
-	if(defined($lang)) {
+	if(defined(my $lang = ($params{'lang'} || _get_language()))) {
 		if(($lang eq 'fr') || ($lang eq 'en')) {
 			$data = Data::Section::Simple::get_data_section("provinces_$lang");
 		} else {
@@ -73,6 +71,7 @@ sub new {
 
 	my @lines = split /\n/, $data;
 
+	my $self = {};
 	for (@lines) {
 		my($code, $province) = split /:/;
 		$self->{code2province}{$code} = $province;
