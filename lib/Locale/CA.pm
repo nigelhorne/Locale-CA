@@ -102,7 +102,10 @@ sub _get_language
 			return $val;
 		}
 	}
-	return 'en';
+	if(defined($ENV{'LANG'}) && (($ENV{'LANG'} =~ /^C\./) || ($ENV{'LANG'} eq 'C'))) {
+		return 'en';
+	}
+	return;	# undef
 }
 
 =head2 all_province_codes
@@ -187,7 +190,7 @@ Based on L<Locale::US> - Copyright (c) 2002 - C<< $present >> Terrence Brannon.
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2012-2021 Nigel Horne.
+Copyright 2012-2022 Nigel Horne.
 
 This program is released under the following licence: GPL2
 
