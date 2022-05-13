@@ -43,10 +43,13 @@ sub new {
 	my $proto = shift;
 	my $class = ref($proto) || $proto;
 
-	# Use Lingua::CA->new(), not Lingua::CA::new()
 	if(!defined($class)) {
-		Carp::carp(__PACKAGE__, ' use ->new() not ::new() to instantiate');
-		return;
+		# Use Lingua::CA->new(), not Lingua::CA::new()
+		# Carp::carp(__PACKAGE__, ' use ->new() not ::new() to instantiate');
+		# return;
+
+		# FIXME: this only works when no arguments are given
+		$class = __PACKAGE__;
 	}
 
 	my %params;

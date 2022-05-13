@@ -11,7 +11,7 @@ BEGIN {
 ERRORS: {
 	eval 'use Test::Exception';
 	if($@) {
-		plan(skip_all => 'Test::Exception required for testing POD spelling');
+		plan(skip_all => 'Test::Exception required for testing errors');
 	} else {
 		dies_ok {
 			my $u = Locale::CA->new({ lang => 'de' });
