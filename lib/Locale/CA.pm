@@ -88,8 +88,8 @@ sub new {
 # https://www.gnu.org/software/gettext/manual/html_node/The-LANGUAGE-variable.html
 sub _get_language
 {
-	if($ENV{'LANGUAGE'}) {
-		foreach my $l(split/:/, $ENV{'LANGUAGE'}) {
+	if(my $language = $ENV{'LANGUAGE'}) {
+		foreach my $l(split/:/, $language) {
 			if(($l eq 'en') || ($l eq 'fr')) {
 				return $l;
 			}
