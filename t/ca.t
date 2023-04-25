@@ -2,7 +2,7 @@
 
 use strict;
 use warnings;
-use Test::Most tests => 17;
+use Test::Most tests => 19;
 use Test::NoWarnings;
 
 BEGIN {
@@ -23,4 +23,7 @@ ALL: {
 	@p = $u->all_province_names();
 
 	cmp_ok(scalar(@p), '==', 12, 'There are 12 provinces');
+
+	cmp_ok($u->{code2province}{'BC'}, 'eq', 'BRITISH COLUMBIA', 'code2province');
+	cmp_ok($u->{province2code}{'ONTARIO'}, 'eq', 'ON', 'province2code');
 }

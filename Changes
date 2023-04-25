@@ -1,5 +1,8 @@
 Revision history for Locale-CA
 
+0.06
+	Fix synopsis syntax
+
 0.05	Sat Feb 25 10:35:03 EST 2023
 	Include normalized strings
 	Use _get_language from Lingua::Conjunction

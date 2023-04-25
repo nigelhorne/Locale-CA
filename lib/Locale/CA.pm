@@ -25,11 +25,11 @@ our $VERSION = '0.05';
 
     # Returns the French names of the provinces if $LANG starts with 'fr' or
     #	the lang parameter is set to 'fr'
-    my $province = $u->{code2province}{$code};
-    my $code  = $u->{province2code}{$province};
+    print $u->{code2province}{'ON'}, "\n";	# prints ONTARIO
+    print $u->{province2code}{'ONTARIO'}, "\n";	# prints ON
 
-    my @province = $u->all_province_names;
-    my @code  = $u->all_province_codes;
+    my @province = $u->all_province_names();
+    my @code = $u->all_province_codes();
 
 =head1 SUBROUTINES/METHODS
 
