@@ -2,18 +2,18 @@
 
 use strict;
 use warnings;
-
 use Test::Most;
 
 BEGIN {
-	if($ENV{'AUTHOR_TESTING'}) {
+	if($ENV{AUTHOR_TESTING}) {
 		eval {
-			require Test::Distribution;
+			require Test::EOL;
 		};
 		if($@) {
-			plan(skip_all => 'Test::Distribution not installed');
+			plan(skip_all => 'Test::EOL not installed');
 		} else {
-			Test::Distribution->import();
+			import Test::EOL;
+			all_perl_files_ok({ trailing_whitespace => 1 });
 		}
 	} else {
 		plan(skip_all => 'Author tests not required for installation');

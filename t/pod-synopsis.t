@@ -1,17 +1,16 @@
-#!perl -w
+#!/usr/bin/perl -w
 
 use strict;
 use warnings;
-
 use Test::Most;
 
 if($ENV{AUTHOR_TESTING}) {
-	eval 'use Test::Strict';
+	eval 'use Test::Synopsis';
+
 	if($@) {
-		plan(skip_all => 'Test::Strict required for testing use strict');
+		plan(skip_all => 'Test::Synopsis required for testing POD Synopsis');
 	} else {
-		all_perl_files_ok();
-		warnings_ok('lib/Locale/CA.pm');
+		all_synopsis_ok();
 	}
 } else {
 	plan(skip_all => 'Author tests not required for installation');

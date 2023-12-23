@@ -2,6 +2,7 @@ package Locale::CA;
 
 use warnings;
 use strict;
+use Carp;
 use Data::Section::Simple;
 
 =head1 NAME
@@ -10,11 +11,11 @@ Locale::CA - two letter codes for province identification in Canada and vice ver
 
 =head1 VERSION
 
-Version 0.02
+Version 0.05
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.05';
 
 =head1 SYNOPSIS
 
@@ -22,12 +23,13 @@ our $VERSION = '0.02';
 
     my $u = Locale::CA->new();
 
-    my $province = $u->{code2province}{$code};
-    my $code  = $u->{province2code}{$province};
+    # Returns the French names of the provinces if $LANG starts with 'fr' or
+    #	the lang parameter is set to 'fr'
+    print $u->{code2province}{'ON'}, "\n";	# prints ONTARIO
+    print $u->{province2code}{'ONTARIO'}, "\n";	# prints ON
 
-    my @province = $u->all_province_names;
-    my @code  = $u->all_province_codes;
-
+    my @province = $u->all_province_names();
+    my @code = $u->all_province_codes();
 
 =head1 SUBROUTINES/METHODS
 
@@ -41,21 +43,71 @@ sub new {
 	my $proto = shift;
 	my $class = ref($proto) || $proto;
 
-	return unless(defined($class));
+	if(!defined($class)) {
+		# Use Lingua::CA->new(), not Lingua::CA::new()
+		# Carp::carp(__PACKAGE__, ' use ->new() not ::new() to instantiate');
+		# return;
+
+		# FIXME: this only works when no arguments are given
+		$class = __PACKAGE__;
+	}
+
+	my %params;
+	if(ref($_[0]) eq 'HASH') {
+		%params = %{$_[0]};
+	} elsif(scalar(@_) % 2 == 0) {
+		%params = @_;
+	} else {
+		$params{'lang'} = shift;
+	}
+
+	my $data;
+	if(defined(my $lang = ($params{'lang'} || _get_language()))) {
+		if(($lang eq 'fr') || ($lang eq 'en')) {
+			$data = Data::Section::Simple::get_data_section("provinces_$lang");
+		} else {
+			Carp::croak("lang can only be one of 'en' or 'fr', given $lang");
+		}
+	} else {
+		$data = Data::Section::Simple::get_data_section('provinces_en');
+	}
+
+	my @lines = split /\n/, $data;
 
 	my $self = {};
-
-	my $data = Data::Section::Simple::get_data_section('provinces');
-
-	my @line = split /\n/, $data;
-
-	for (@line) {
+	for (@lines) {
 		my($code, $province) = split /:/;
 		$self->{code2province}{$code} = $province;
 		$self->{province2code}{$province} = $code;
 	}
 
 	return bless $self, $class;
+}
+
+# https://www.gnu.org/software/gettext/manual/html_node/Locale-Environment-Variables.html
+# https://www.gnu.org/software/gettext/manual/html_node/The-LANGUAGE-variable.html
+sub _get_language
+{
+	if(my $language = $ENV{'LANGUAGE'}) {
+		foreach my $l(split/:/, $language) {
+			if(($l eq 'en') || ($l eq 'fr')) {
+				return $l;
+			}
+		}
+	}
+	foreach my $variable('LC_ALL', 'LC_MESSAGES', 'LANG') {
+		my $val = $ENV{$variable};
+		next unless(defined($val));
+
+		$val = substr($val, 0, 2);
+		if(($val eq 'en') || ($val eq 'fr')) {
+			return $val;
+		}
+	}
+	if(defined($ENV{'LANG'}) && (($ENV{'LANG'} =~ /^C\./) || ($ENV{'LANG'} eq 'C'))) {
+		return 'en';
+	}
+	return;	# undef
 }
 
 =head2 all_province_codes
@@ -124,10 +176,6 @@ You can also look for information at:
 
 L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Locale-CA>
 
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/Locale-CA>
-
 =item * CPAN Ratings
 
 L<http://cpanratings.perl.org/d/Locale-CA>
@@ -144,15 +192,15 @@ Based on L<Locale::US> - Copyright (c) 2002 - C<< $present >> Terrence Brannon.
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2012-2015 Nigel Horne.
+Copyright 2012-2023 Nigel Horne.
 
-This program is released under the following licence: GPL
+This program is released under the following licence: GPL2
 
 =cut
 
 1; # End of Locale::CA
 __DATA__
-@@ provinces
+@@ provinces_en
 AB:ALBERTA
 BC:BRITISH COLUMBIA
 MB:MANITOBA
@@ -163,6 +211,19 @@ NS:NOVA SCOTIA
 ON:ONTARIO
 PE:PRINCE EDWARD ISLAND
 QC:QUEBEC
+SK:SASKATCHEWAN
+YT:YUKON
+@@ provinces_fr
+AB:ALBERTA
+BC:COLOMBIE-BRITANNIQUE
+MB:MANITOBA
+NB:NOUVEAU-BRUNSWICK
+NL:TERRE-NEUVE-ET-LABRADOR
+NT:TERRITOIRES DU NORD-OUEST
+NS:NOUVELLE-ÉCOSSE
+ON:ONTARIO
+PE:ÎLE-DU-PRINCE-ÉDOUARD
+QC:QUÉBEC
 SK:SASKATCHEWAN
 YT:YUKON
 __END__
