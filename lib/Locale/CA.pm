@@ -72,10 +72,9 @@ sub new {
 		$data = Data::Section::Simple::get_data_section('provinces_en');
 	}
 
-	my @lines = split /\n/, $data;
 
 	my $self = {};
-	for (@lines) {
+	for(split /\n/, $data) {
 		my($code, $province) = split /:/;
 		$self->{code2province}{$code} = $province;
 		$self->{province2code}{$province} = $code;
