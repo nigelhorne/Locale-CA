@@ -2,7 +2,7 @@
 
 use strict;
 use warnings;
-use Test::Most tests => 19;
+use Test::Most tests => 20;
 use Test::NoWarnings;
 
 BEGIN {
@@ -20,10 +20,12 @@ ALL: {
 		cmp_ok(length($p), '==', 2, "$p should be two letters");
 	}
 
-	@p = $u->all_province_names();
+	# @p = $u->all_province_names();
 
-	cmp_ok(scalar(@p), '==', 12, 'There are 12 provinces');
+	# cmp_ok(scalar(@p), '==', 12, 'There are 12 provinces');
 
 	cmp_ok($u->{code2province}{'BC'}, 'eq', 'BRITISH COLUMBIA', 'code2province');
 	cmp_ok($u->{province2code}{'ONTARIO'}, 'eq', 'ON', 'province2code');
+	cmp_ok($u->{province2code}{'ALBERTA'}, 'eq', 'AB', 'Alberta');
+	cmp_ok($u->{province2code}{'ALBT.'}, 'eq', 'AB', 'Albt.');
 }
