@@ -39,3 +39,4 @@ t/strict.t
 t/unused.t
 t/used.t
 t/vars.t
+t/version.t

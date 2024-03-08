@@ -191,7 +191,7 @@ Based on L<Locale::US> - Copyright (c) 2002 - C<< $present >> Terrence Brannon.
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2012-2023 Nigel Horne.
+Copyright 2012-2024 Nigel Horne.
 
 This program is released under the following licence: GPL2
 
