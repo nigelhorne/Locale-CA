@@ -175,10 +175,6 @@ You can also look for information at:
 
 L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Locale-CA>
 
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/Locale-CA>
-
 =item * Search CPAN
 
 L<http://search.cpan.org/dist/Locale-CA/>
