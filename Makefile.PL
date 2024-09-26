@@ -1,6 +1,15 @@
 use strict;
 use warnings;
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker 6.64;	# 6.64 for TEST_REQUIRES
+
+my $dist = {
+	COMPRESS => 'gzip -9f',
+	SUFFIX => 'gz'
+};
+
+if($^O eq 'darwin') {
+	$dist->{'TAR'} = 'gtar';
+}
 
 WriteMakefile(
 	NAME			=> 'Locale::CA',
@@ -22,8 +31,7 @@ WriteMakefile(
 	}, PREREQ_PM => {
 		'Carp' => 0,
 		'Data::Section::Simple' => 0,
-	},
-	dist	=> { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
+	}, dist => $dist,
 	clean	   => { FILES => 'Locale-CA-*' },
 	META_MERGE		=> {
 		'meta-spec' => { version => 2 },

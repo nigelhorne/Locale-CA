@@ -3,6 +3,7 @@ Revision history for Locale-CA
 0.06
 	Fix synopsis syntax
 	Map Ablt. to AB
+	Fix http://www.cpantesters.org/cpan/report/147792c2-7b94-11ef-9c4f-aa1bc4b6c371
 
 0.05	Sat Feb 25 10:35:03 EST 2023
 	Include normalized strings
