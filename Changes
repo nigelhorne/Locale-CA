@@ -2,6 +2,8 @@ Revision history for Locale-CA
 
 0.07
 	Allow Newfoundland, as well as Newfoundland and Labrador
+	Use Test::DescribeMe to simplify tests
+	Use Test::Needs
 
 0.06	Thu Sep 26 08:42:57 EDT 2024
 	Fix synopsis syntax
