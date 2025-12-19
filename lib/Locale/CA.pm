@@ -4,6 +4,7 @@ use warnings;
 use strict;
 use Carp;
 use Data::Section::Simple;
+use I18N::LangTags::Detect;
 
 =head1 NAME
 
@@ -102,27 +103,13 @@ sub new {
 
 # https://www.gnu.org/software/gettext/manual/html_node/Locale-Environment-Variables.html
 # https://www.gnu.org/software/gettext/manual/html_node/The-LANGUAGE-variable.html
-sub _get_language
-{
-	if(my $language = $ENV{'LANGUAGE'}) {
-		foreach my $l(split/:/, $language) {
-			if(($l eq 'en') || ($l eq 'fr')) {
-				return $l;
-			}
+sub _get_language {
+	for my $tag (I18N::LangTags::Detect::detect()) {
+		if ($tag =~ /^([a-z]{2})/i) {
+			return lc $1;
 		}
 	}
-	foreach my $variable('LC_ALL', 'LC_MESSAGES', 'LANG') {
-		my $val = $ENV{$variable};
-		next unless(defined($val));
-
-		$val = substr($val, 0, 2);
-		if(($val eq 'en') || ($val eq 'fr')) {
-			return $val;
-		}
-	}
-	if(defined($ENV{'LANG'}) && (($ENV{'LANG'} =~ /^C\./) || ($ENV{'LANG'} eq 'C'))) {
-		return 'en';
-	}
+	return 'en' if ($ENV{LANG} && $ENV{LANG} =~ /^C(?:\.|$)/);
 	return;	# undef
 }
 
