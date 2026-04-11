@@ -1,6 +1,6 @@
 Revision history for Locale-CA
 
-0.09
+0.09	Fri Apr 10 20:48:26 EDT 2026
 	Added fuzz testing
 	Use I18N::LangTags::Detect
 	Added Nunavut
