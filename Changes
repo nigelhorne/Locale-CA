@@ -1,6 +1,6 @@
 Revision history for Locale-CA
 
-0.10
+0.10	Sun Jun 28 19:20:41 EDT 2026
 	Non-en/fr system locales now fall back to English instead of croaking
 	Explicit lang parameter is now case-insensitive ('FR' and 'EN' accepted)
 	Function-call style new() with a non-class first arg now works correctly

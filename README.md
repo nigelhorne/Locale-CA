@@ -4,7 +4,7 @@ Locale::CA - two letter codes for province identification in Canada and vice ver
 
 # VERSION
 
-Version 0.09
+Version 0.10
 
 # SYNOPSIS
 
@@ -52,7 +52,7 @@ province name as the value.
 
 # AUTHOR
 
-Nigel Horne, `<njh at bandsman.co.uk>`
+Nigel Horne, `<njh at nigelhorne.com>`
 
 # BUGS
 
