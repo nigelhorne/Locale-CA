@@ -56,8 +56,7 @@ Nigel Horne, `<njh at bandsman.co.uk>`
 
 # BUGS
 
-- The province name is returned in `uc()` format.
-- neither hash is strict, though they should be.
+- Province names are returned in upper-case (`uc()`) format.
 
 # SUPPORT
 

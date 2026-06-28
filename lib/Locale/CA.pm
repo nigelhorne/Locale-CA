@@ -52,7 +52,7 @@ sub new {
 		$class = __PACKAGE__;
 	} elsif(ref($proto)) {
 		$class = ref($proto);
-	} elsif(UNIVERSAL::isa($proto, __PACKAGE__)) {
+	} elsif(eval { $proto->isa(__PACKAGE__) }) {
 		$class = $proto;
 	} else {
 		# Function-call style with a non-class first arg — treat as argument
@@ -167,9 +167,7 @@ Nigel Horne, C<< <njh at bandsman.co.uk> >>
 
 =over 4
 
-=item * The province name is returned in C<uc()> format.
-
-=item * neither hash is strict, though they should be.
+=item * Province names are returned in upper-case (C<uc()>) format.
 
 =back
 

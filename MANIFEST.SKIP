@@ -64,6 +64,7 @@ schemas\.yml$
 
 \.travis\.yml
 \.appveyor\.yml
+\B\.circleci\b
 \.releaserc
 \.lwpcookies
 Locale-.*

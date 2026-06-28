@@ -23,10 +23,14 @@ WriteMakefile(
 	PL_FILES	=> {},
 	BUILD_REQUIRES => {
 	}, TEST_REQUIRES => {
+		'IPC::Run3' => 0,
+		'IPC::System::Simple' => 0,
 		'Test::DescribeMe' => 0,
+		'Test::Exception' => 0,
 		'Test::Most' => 0,
 		'Test::Needs' => 0,
 		'Test::NoWarnings' => 0,
+		'Test::Which' => 0,
 		# 'Test::Kwalitee' => 0,
 	}, PREREQ_PM => {
 		'Carp' => 0,
