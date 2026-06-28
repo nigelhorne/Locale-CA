@@ -18,6 +18,8 @@ Version 0.09
 
 our $VERSION = '0.09';
 
+my %_cache;
+
 =head1 SYNOPSIS
 
     use Locale::CA;
@@ -44,60 +46,66 @@ Can be called both as a class method (Locale::CA->new()) and as an object method
 
 sub new {
 	my $proto = shift;
-	my $class = ref($proto) || $proto;
+	my $class;
 
-	# If the class is undefined, fallback to the current package name
-	if(!defined($class)) {
-		# Use Locale::CA->new(), not Locale::CA::new()
-		# Carp::carp(__PACKAGE__, ' use ->new() not ::new() to instantiate');
-		# return;
-
-		# FIXME: this only works when no arguments are given
+	if(!defined($proto)) {
+		$class = __PACKAGE__;
+	} elsif(ref($proto)) {
+		$class = ref($proto);
+	} elsif(UNIVERSAL::isa($proto, __PACKAGE__)) {
+		$class = $proto;
+	} else {
+		# Function-call style with a non-class first arg — treat as argument
+		unshift @_, $proto;
 		$class = __PACKAGE__;
 	}
 
 	my %params;
 	if(ref($_[0]) eq 'HASH') {
-		# If the first argument is a hash reference, dereference it
 		%params = %{$_[0]};
-	} elsif(scalar(@_) % 2 == 0) {
-		# If there is an even number of arguments, treat them as key-value pairs
+	} elsif(@_ % 2 == 0) {
 		%params = @_;
-	} elsif(scalar(@_) == 1) {
-		# If there is one argument, assume the first is 'lang'
+	} elsif(@_ == 1) {
 		$params{'lang'} = shift;
 	} else {
-		# If there is an odd number of arguments, treat it as an error
 		Carp::croak(__PACKAGE__, ': Invalid arguments passed to new()');
-		return;
 	}
 
-	# Determine the language and load the corresponding data
-	my $data;
-	if(defined(my $lang = ($params{'lang'} || _get_language()))) {
-		if(($lang eq 'fr') || ($lang eq 'en')) {
-			# Load data for the specified language (English or French)
-			$data = Data::Section::Simple::get_data_section("provinces_$lang");
-		} else {
-			# Invalid language specified, throw an error
-			Carp::croak("lang can only be one of 'en' or 'fr', given $lang");
-		}
+	my $lang;
+	if(defined(my $explicit = $params{'lang'})) {
+		$lang = lc($explicit);
+		Carp::croak("lang can only be one of 'en' or 'fr', given $explicit")
+			unless $lang eq 'en' || $lang eq 'fr';
 	} else {
-		# If no language is specified, fallback to English
-		$data = Data::Section::Simple::get_data_section('provinces_en');
+		my $detected = _get_language();
+		if(defined($detected) && ($detected eq 'en' || $detected eq 'fr')) {
+			$lang = $detected;
+		} else {
+			$lang = 'en';
+		}
 	}
 
-	# Parse the data into bidirectional mappings
-	my $self = {};
-	for(split /\n/, $data) {
-		my($code, $province) = split /:/;
-		# Map codes to provinces
-		$self->{code2province}{$code} = $province;
-		# Map provinces to codes
-		$self->{province2code}{$province} = $code;
+	unless(exists $_cache{$lang}) {
+		my $data = Data::Section::Simple::get_data_section("provinces_$lang");
+		Carp::croak("Internal error: data section 'provinces_$lang' not found")
+			unless defined $data;
+
+		my(%c2p, %p2c);
+		for(split /\n/, $data) {
+			next unless /\S/;
+			my($code, $province) = split /:/, $_, 2;
+			next unless defined $code && defined $province;
+			$c2p{$code} = $province;
+			$p2c{$province} = $code;
+		}
+		$_cache{$lang} = { code2province => \%c2p, province2code => \%p2c };
 	}
 
-	# Bless the hash reference into an object of the specified class
+	my $self = {
+		code2province => { %{$_cache{$lang}{code2province}} },
+		province2code => { %{$_cache{$lang}{province2code}} },
+	};
+
 	return bless $self, $class;
 }
 
